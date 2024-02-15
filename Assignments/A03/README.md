@@ -9,7 +9,7 @@
 |   #   | File             | Description                                        |
 | :---: | ---------------- | -------------------------------------------------- |
 |   1   | [api.py](https://github.com/michelle083/4443-MobileApps/edit/main/Assignments/A03/api.py) | api file |
-|   2   | [requirements.txt](https://github.com/michelle083/4443-MobileApps/edit/main/Assignments/A03/requirements.txt) | file with needed requirements|
+|   2   | [requirements.txt](https://github.com/michelle083/4443-MobileApps/edit/main/Assignments/A03/requirements.txt) | needed requirements|
 
 
 ### Instructions
