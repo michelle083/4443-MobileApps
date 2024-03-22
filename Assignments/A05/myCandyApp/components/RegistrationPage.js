@@ -174,7 +174,7 @@ const RegistrationPage = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>REGISTER</Text>
+      <Text style={styles.title}>NEW USER</Text>
 
       <Text style={styles.subtitles}>First Name</Text>
       <TextInput
@@ -201,10 +201,10 @@ const RegistrationPage = () => {
         onChangeText={text => setEmail(text)}
       />
 
-      <Text style={styles.subtitles}>Username (Email)</Text>
+      <Text style={styles.subtitles}>Username</Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter username (email)"
+        placeholder="Enter username"
         keyboardType="email-address"
         value={username}
         onChangeText={text => setUsername(text)}
