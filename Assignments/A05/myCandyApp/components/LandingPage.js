@@ -2,16 +2,32 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const LandingPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Hello world</Text>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('RegistrationPage')}
+      >
+        <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('RegisteredUsers')}
+      >
+        <Text style={styles.buttonText}>Users</Text>
+      </TouchableOpacity>   
+      
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('LoginPage')}
       >
-        <Text style={styles.buttonText}>Logout</Text>
+        <Text style={styles.buttonText}>Log Out</Text>
       </TouchableOpacity>
     </View>
   );
@@ -40,9 +56,10 @@ const styles = StyleSheet.create({
    */
   button: {
     alignitems: 'center',
-    backgroundColor: '#9500ffad',
+    backgroundColor: '#9500ff83',
     paddingVertical: 15,
     paddingHorizontal: 20,
+    marginBottom: 20,
     borderRadius: 5,
   },
   /**

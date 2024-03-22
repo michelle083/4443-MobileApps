@@ -9,16 +9,33 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    // Simulated login logic
+  const handleLogin = async () => {
     if (username === 'Admin' && password === 'password') {
-      // Successful login
-      navigation.navigate('LandingPage');
-    } else {
-      // Invalid credentials
-      Alert.alert('Login Failed', 'Invalid username or password. Please try again.');
+        //     // Successful login
+            navigation.navigate('LandingPage');
+      } 
+      else{ 
+        try {
+      const userData = await AsyncStorage.getItem(username);
+      
+      if (userData) {
+        const { password: storedPassword } = JSON.parse(userData);
+        if (password === storedPassword) {
+          navigation.navigate('LandingPage');
+          return;
+        }
+      }
+      else{
+        Alert.alert('Login Failed', 'Invalid username or password. Please try again.');
+      }
+      
+    } catch (error) {
+      Alert.alert('Login Failed', 'An error occurred while logging in. Please try again.');
     }
+      }
+      
   };
+  
 
   return (
     <KeyboardAvoidingView
@@ -72,7 +89,7 @@ const styles = StyleSheet.create({
   input: {
     width: '80%',
     paddingVertical: 9,
-    paddingHorizontal: 30,
+    paddingHorizontal: 40,
     marginBottom: 20,
     borderWidth: 1,
     borderColor: '#ccc',
