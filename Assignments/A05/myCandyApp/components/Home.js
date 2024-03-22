@@ -4,10 +4,10 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const LandingPage = ({ navigation }) => {
+const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hello world</Text>
+      <Text style={styles.title}>Choose below</Text>
 
       <TouchableOpacity
         style={styles.button}
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LandingPage;
+export default Home;
