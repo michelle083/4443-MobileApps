@@ -148,6 +148,10 @@ const LoginPage = () => {
     }
   };
 
+  const handleRegistration = () => {
+    navigation.navigate('RegistrationPage'); // Navigate to the registration page
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -172,9 +176,17 @@ const LoginPage = () => {
           onChangeText={text => setPassword(text)}
         />
         
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity style={styles.button1} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+
+        <Text style={styles.subtitles}> </Text>
+        <Text style={styles.subtitles}> </Text>
+        <Text style={styles.subtitles}>Don't have an account?</Text>
+        <TouchableOpacity style={styles.button2} onPress={handleRegistration}>
+          <Text style={styles.buttonText}>Register</Text>
+        </TouchableOpacity>
+
       </View>
     </KeyboardAvoidingView>
   );
@@ -206,8 +218,14 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
   },
-  button: {
+  button1: {
     backgroundColor: '#007bff',
+    paddingVertical: 15,
+    paddingHorizontal: 5,
+    borderRadius: 5,
+  },
+  button2: {
+    backgroundColor: '##8e405d',
     paddingVertical: 15,
     paddingHorizontal: 5,
     borderRadius: 5,
