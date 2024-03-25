@@ -181,9 +181,9 @@ const LoginPage = () => {
         </TouchableOpacity>
 
         <Text style={styles.subtitles}> </Text>
-        <Text style={styles.subtitles}> </Text>
+        <Text style={styles.subtitles2}>-OR- </Text>
         <Text style={styles.subtitles}>Don't have an account?</Text>
-        <TouchableOpacity style={styles.button2} onPress={handleRegistration}>
+        <TouchableOpacity style={styles.button1} onPress={handleRegistration}>
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
 
@@ -209,6 +209,12 @@ const styles = StyleSheet.create({
     fontWeight: 'thin',
     marginBottom: 5,
   },
+  subtitles2: {
+    fontSize: 18,
+    fontWeight: 'thin',
+    marginBottom: 5,
+    alignSelf: 'center',
+  },
   input: {
     width: '80%',
     paddingVertical: 9,
@@ -225,7 +231,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   button2: {
-    backgroundColor: '##8e405d',
+    backgroundColor: '##4d031e',
     paddingVertical: 15,
     paddingHorizontal: 5,
     borderRadius: 5,

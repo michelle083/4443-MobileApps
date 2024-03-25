@@ -11,6 +11,7 @@ const Home = ({ navigation }) => {
         style={styles.logo}
         resizeMode="contain"
       />
+      <Text style={styles.title}>Welcome {`${item.username}`}</Text>
       <Text style={styles.title}>Choose an action</Text>
 
       <TouchableOpacity
@@ -28,6 +29,14 @@ const Home = ({ navigation }) => {
         <AntDesign name="user" size={24} color="white" />
         <Text style={styles.buttonText}>Users</Text>
       </TouchableOpacity>   
+      
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('CandySearch')}
+      >
+        <AntDesign name="search1" size={24} color="white" />
+        <Text style={styles.buttonText}>Candy Search</Text>
+      </TouchableOpacity> 
       
       <TouchableOpacity
         style={styles.button}
