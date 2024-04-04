@@ -1,5 +1,5 @@
 // App.js
-
+// import necessary modules
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,13 +10,16 @@ import RegisteredUsers from './components/RegisteredUsers';
 // import Menu from './components/Menu';
 import CandySearch from './components/CandySearch';
 
-
+// create a stack navigator
 const Stack = createStackNavigator();
 
+// App component
 const App = () => {
   return (
+    // wrap the app in a NavigationContainer
     <NavigationContainer>
       <Stack.Navigator>
+        {/* define the screens */}
         <Stack.Screen name="LoginPage" component={LoginPage} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="RegistrationPage" component={RegistrationPage} options={{ title: 'Registration' }} />
