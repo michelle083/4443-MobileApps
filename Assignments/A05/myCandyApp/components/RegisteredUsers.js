@@ -1,8 +1,10 @@
+// import necessary modules
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
+// RegisteredUsersPage component
 const RegisteredUsersPage = () => {
   const [registeredUsers, setRegisteredUsers] = useState([]);
   const [editMode, setEditMode] = useState(false);
