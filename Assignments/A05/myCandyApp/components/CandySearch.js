@@ -33,7 +33,6 @@ const CandyCatalogPage = () => {
   const [filteredCandyData, setFilteredCandyData] = useState(candyData);
 
   const handleSearch = (text) => {
-    const filteredData = candyData.filter(candy => candy.name.toLowerCase().includes(text.toLowerCase()));
     setSearchText(text);
     setFilteredCandyData(filteredData);
   };
