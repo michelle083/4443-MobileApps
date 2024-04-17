@@ -1,34 +1,37 @@
-// App.js
-// import necessary modules
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginPage from './components/LoginPage';
-import Home from './components/Home';
-import RegistrationPage from './components/RegistrationPage';
-import RegisteredUsers from './components/RegisteredUsers';
-// import Menu from './components/Menu';
-import CandySearch from './components/CandySearch';
+import BottomTabNavigator from './src/navigation/bottomTab'; // Adjust the path as necessary
+import LoginPage from './src/screens/LoginPage';
+import RegistrationPage from './src/screens/RegistrationPage';
+import Home from './src/screens/Home';
+import LocationPage from './src/screens/LocationPage';
+import RegisteredUsers from './src/screens/RegisteredUsers';
+import SettingsPage from './src/screens/SettingsPage';
+import CandySearch from './src/screens/CandySearch';
+import ThemeContext from './src/components/ThemeContext';
+import { useState } from 'react';
+import { useContext } from 'react';
 
-// create a stack navigator
 const Stack = createStackNavigator();
 
-// App component
-const App = () => {
-  return (
-    // wrap the app in a NavigationContainer
-    <NavigationContainer>
-      <Stack.Navigator>
-        {/* define the screens */}
-        <Stack.Screen name="LoginPage" component={LoginPage} options={{ headerShown: false }} />
-        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-        <Stack.Screen name="RegistrationPage" component={RegistrationPage} options={{ title: 'Registration' }} />
-        <Stack.Screen name="RegisteredUsers" component={RegisteredUsers} options={{ title: 'Registered Users' }} />
-        {/* <Stack.Screen name="Menu" component={Menu} options={{ title: 'Menu' }} /> */}
-        <Stack.Screen name="CandySearch" component={CandySearch} options={{ title: 'Candy Search' }} /> 
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+export default function App() {
+  const [theme, setTheme] = useState('light');
 
-export default App;
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <NavigationContainer>
+        <Stack.Navigator  >
+          <Stack.Screen name="LoginPage" component={LoginPage} />
+          <Stack.Screen name="RegistrationPage" component={RegistrationPage} />
+          <Stack.Screen name="Location" component={LocationPage} />
+          <Stack.Screen name="RegisteredUsers" component={RegisteredUsers} />
+          <Stack.Screen name="SettingsPage" component={SettingsPage} />
+          <Stack.Screen name="CandySearch" component={CandySearch} />
+          <Stack.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }}/>
+        </Stack.Navigator>
+    </NavigationContainer>
+  </ThemeContext.Provider>
+  );
+}
+

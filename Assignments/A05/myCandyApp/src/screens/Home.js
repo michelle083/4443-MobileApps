@@ -27,30 +27,39 @@ const Home = ({ navigation }) => {
       <Text style={styles.title}>Welcome to my Candy Shop!</Text>
 
       {/* Buttons to navigate to candy page */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('CandySearch')}
       >
         <AntDesign name="search1" size={24} color="white" />
         <Text style={styles.buttonText}>Candy</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       {/* Buttons to navigate to registered users page */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('RegisteredUsers')}
       >
          <AntDesign name="user" size={24} color="white" />
         <Text style={styles.buttonText}>Users</Text>
-      </TouchableOpacity>  
+      </TouchableOpacity>   */}
 
       {/* Buttons to navigate to registration page */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('RegistrationPage')}
       >
         <AntDesign name="adduser" size={24} color="white" />
         <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity> */}
+
+       {/* Buttons to navigate to registration page */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('SettingsPage')}
+      >
+        <AntDesign name="setting" size={24} color="white" />
+        <Text style={styles.buttonText}>Settings</Text>
       </TouchableOpacity>
 
       {/* Button to log out */}

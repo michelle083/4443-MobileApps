@@ -28,15 +28,29 @@ const candyData = [
   { id: 21, name: 'Candy-bar', icon: require('/Users/miche/Documents/m s u/Spring2k24/MOB/4443-MobileApps/Assignments/A05/myCandyApp/assets/candy-3.png') }
 ];
 
+
 const CandyCatalogPage = () => {
   const [searchText, setSearchText] = useState('');
   const [filteredCandyData, setFilteredCandyData] = useState(candyData);
 
+  // Function to fetch candy data from the API
+  const fetchCandyDataFromApi = async () => {
+    try {
+      const response = await fetch('http://161.35.231.247:8084/candies');
+      const data = await response.json();
+      setApiData(data);
+    } catch (error) {
+      console.error('Error fetching candy data:', error);
+    }
+  };
+
+  // Function to handle search
   const handleSearch = (text) => {
+    const filteredData = candyData.filter(candy => candy.name.toLowerCase().includes(text.toLowerCase()));
     setSearchText(text);
     setFilteredCandyData(filteredData);
   };
-
+  
   const renderCandyItem = ({ item }) => (
     <TouchableOpacity style={styles.candyItem}>
       <Image source={item.icon} style={styles.candyIcon} />

@@ -1,8 +1,9 @@
 // import necessary modules
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform, KeyboardAvoidingView, Alert } from 'react-native';
+import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet, Platform, KeyboardAvoidingView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import { loginUser } from '../api/api';  
 
 // LoginPage component
 const LoginPage = () => {
@@ -19,8 +20,12 @@ const LoginPage = () => {
         navigation.navigate('Home');
         return;
       }
-
-      // Check if the username exists in AsyncStorage
+      
+        // // Successful login for registered user
+        // const user = await loginUser(username, password);
+        // navigation.navigate('Home');
+        // return;
+        // Check if the username exists in AsyncStorage
       const userData = await AsyncStorage.getItem(username);
       
       if (userData) {
@@ -31,22 +36,21 @@ const LoginPage = () => {
           navigation.navigate('Home');
           return;
         }
-      }
-
-      // Login failed
-      Alert.alert('Login Failed', 'Invalid username or password. Please try again.');
       
-    } 
-
-    // Catch any errors that occur during login
-    catch (error) {
-      Alert.alert('Login Failed', 'An error occurred while logging in. Please try again.');
     }
+    Alert.alert('Login Failed', 'Invalid username or password. Please try again.');
+  } catch (error) {
+    Alert.alert('Login Failed', 'An error occurred while logging in. Please try again.');
+  }
   };
 
-  // function to handle registration
-  const handleRegistration = () => {
-    navigation.navigate('RegistrationPage'); // Navigate to the registration page
+  // // function to handle registration
+  // const handleRegistration = () => {
+  //   navigation.navigate('RegistrationPage'); // Navigate to the registration page
+  // };
+
+  const handleBrowseAsGuest = () => {
+    navigation.navigate('Home'); // Navigate to the home page
   };
 
   // buttons for login and registration
@@ -96,8 +100,16 @@ const LoginPage = () => {
       <Text style={styles.subtitles}> </Text>
       <Text style={styles.subtitles2}>-OR- </Text>
       <Text style={styles.subtitles}>Don't have an account?</Text>
-      <TouchableOpacity style={styles.button1} onPress={handleRegistration}>
+      
+      {/* <TouchableOpacity style={styles.button1} onPress={handleRegistration}>
         <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity> */}
+
+      {/* <Button title="Browse as Guest" onPress={handleBrowseAsGuest} />
+       */}
+       
+      <TouchableOpacity style={styles.button1} onPress={handleBrowseAsGuest}>
+        <Text style={styles.buttonText}>Browse as a Guest</Text>
       </TouchableOpacity>
 
     </View>
