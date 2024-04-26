@@ -1,7 +1,17 @@
 // ThemeContext.js
+import React, { createContext, useState, useContext } from 'react';
+import SettingsPage from './src/components/SettingsPage';
 
-import React from 'react';
+const ThemeContext = createContext();
 
-const ThemeContext = React.createContext();
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState('light');
 
-export default ThemeContext;
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => useContext(ThemeContext);

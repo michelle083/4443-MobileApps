@@ -2,19 +2,19 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 
-
-const resetRegistration = () => {
-  navigation.dispatch(
-    CommonActions.reset({
-      index: 0,
-      routes: [{ name: 'LoginPage' }], // Reset to LoginPage
-    })
-  );
+// Define a function to reset the form
+const resetForm = () => {
+  setUsername('');
+  setPassword('');
+  setVerifyPassword('');
+  setFirstName('');
+  setLastName('');
+  setEmail('');
 };
 
-const RegistrationPage = () => {
+const RegistrationPage = ( ) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -33,34 +33,35 @@ const RegistrationPage = () => {
     // Store user information
     try {
       await AsyncStorage.setItem(username, JSON.stringify({ firstName, lastName, email, password }));
-      Alert.alert('Registration Successful', 'You have been successfully registered.');
+      Alert.alert('Registration Successful', 'You have been succesfully registered', 'Please log in to continue');
       
-      navigation.navigate('Home');
-    } catch (error) {
-      console.error('Error storing user data:', error);
-      Alert.alert('Registration Failed', 'An error occurred while registering. Please try again.');
-    }
-
-    try {
-      const response = await fetch('http://161.35.231.247:8084/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Registration failed');
-      }
-
-      Alert.alert('Registration Successful', 'You can now log in with your new account.');
+      navigation.navigate('LoginPage');
+      resetForm();
     } catch (error) {
       Alert.alert('Registration Failed', 'An error occurred while registering. Please try again.');
     }
+
+    // try {
+    //   const response = await fetch('http://161.35.231.247:8084/register', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       password,
+    //     }),
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error('Registration failed');
+    //   }
+
+    //   // Alert.alert('Registration Successful', 'You can now log in with your new account.');
+    // } 
+    // catch (error) {
+    //   Alert.alert('Registration Failed', 'An error occurred while registering. Please try again.');
+    // }
 
   };
 
@@ -120,7 +121,8 @@ const RegistrationPage = () => {
         onChangeText={text => setVerifyPassword(text)}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleRegister} onPressOut={resetRegistration}>
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
+        {/* onPressOut={resetRegistration({navigation}) */}
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
