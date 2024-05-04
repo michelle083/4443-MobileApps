@@ -14,7 +14,7 @@ const resetForm = () => {
   setEmail('');
 };
 
-const RegistrationPage = ( ) => {
+const Registration = ( ) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -170,4 +170,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegistrationPage;
+export default Registration;

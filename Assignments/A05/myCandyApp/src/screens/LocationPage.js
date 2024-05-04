@@ -1,66 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Alert, Button, View, Text } from 'react-native'; // Added import statement for Text component
 import MapView, { Marker } from 'react-native-maps';
-// import Geolocation from 'react-native-geolocation-service';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import * as Location from 'expo-location';
 
 const LocationScreen = () => {
-    const [location, setLocation] = useState(null);
-    const [locations, setLocations] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
-    const [username, setUsername] = useState('');
-    const [modalVisible, setModalVisible] = useState(false);
+        const [location, setLocation] = useState(null);
+        const [errorMsg, setErrorMsg] = useState(null);
+        const [additionalUsersLocations, setAdditionalUsersLocations] = useState([]);
+        const mapViewRef = useRef(null);
 
-    const getLocations = async () => {
-        try {
-            const response = await fetch(
-                'http://sendmessage.live:7373/locationo',
-            );
-            const json = await response.json();
-            console.log(json);
-            return json;
-        } catch (error) {
-            console.error(error);
-        }
-    };
+        const fetchAdditionalUsersLocations = async () => {
+                try {
+                        const response = await fetch('http://161.35.231.247:8084/location');
+                        const locations = await response.json();
+                        setAdditionalUsersLocations(locations);
+                } catch (error) {
+                        console.error(error);
+                        setErrorMsg('Failed to fetch additional users locations');
+                }
+        };
 
-    useEffect(() => {
-        getLocations().then(setLocations);
-    }, []);
+        useEffect(() => {
+                //  Get user's current location
+                const requestLocationPermission = async () => {
+                        let { status } = await Location.requestForegroundPermissionsAsync();
+                        if (status !== 'granted') {
+                            setErrorMsg('Permission to access location was denied');
+                        } else {
+                                const { coords } = await Location.getCurrentPositionAsync({});
+                                setLocation(coords);
+                        }
+                };
 
-    const handlePress = () => {
-        // Add your logic here
-        mapViewRef.current.animateToRegion({
-            latitude: 33.2151,
-            longitude: -97.1331,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }, 1000); // 1000 ms animation duration
-    };
+                fetchAdditionalUsersLocations();
+                requestLocationPermission();
 
-    const region = {
-        latitude: 33.2151,
-        longitude: -97.1331,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-    };
-
-    const markers = locations || [];
+                // Cleanup function
+                return () => clearInterval(interval);
+        }, []);
 
     return (
-        <MapView ref={ref => { this.mapView = ref; }} style={{ flex: 1 }} initialRegion={region}>
-            <Button
-                title="Focus on My Location"
-                onPress={handlePress}
-            />
-            {markers.map((marker, index) => (
-                <Marker
-                    key={index}
-                    coordinate={marker.coordinate}
-                    title={marker.title}
-                    description={marker.description}
-                />
-            ))}
-        </MapView>
+        <View style={{ flex: 1 }}>
+            <MapView
+                ref={mapViewRef}
+                style={{ flex: 1 }}
+                region={{
+                    latitude: location?.latitude || 30.2672,
+                    longitude: location?.longitude || -97.7431,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+            >
+                {additionalUsersLocations.map((location, index) => (
+                    <Marker
+                        key={index}
+                        coordinate={{
+                            latitude: location.latitude,
+                            longitude: location.longitude,
+                        }}
+                        title={location.user_id}
+                        description={`Last updated: ${new Date(location.timestamp).toLocaleString()}`}
+                    />
+                ))}
+            </MapView>
+                {errorMsg && 
+                        <Text>
+                                Error: {errorMsg} 
+                        </Text>
+                }
+        </View>
     );
 };
 
