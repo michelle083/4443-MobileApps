@@ -51,7 +51,7 @@ const BottomTabNavigator = () => {
       {/* <Tab.Screen name="Registration" component={RegistrationPage}  /> */}
       <Tab.Screen name="Candy" component={CandySearch} />
       {/* <Tab.Screen name="Users" component={RegisteredUsers} /> */}
-      <Tab.Screen name="Location" component={LocationPage} options={{ headerShown: false }}/>
+      <Tab.Screen name="Location" component={LocationPage} />
       <Tab.Screen name="Chat" component={ChatPage} />
       <Tab.Screen name="Image" component={ImagePage} />
     </Tab.Navigator>

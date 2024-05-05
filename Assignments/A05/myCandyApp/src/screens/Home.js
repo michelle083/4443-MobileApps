@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation, CommonActions } from '@react-navigation/native'; // Import CommonActions
 import { AntDesign } from '@expo/vector-icons';
+import RegistrationPage from './RegistrationPage';
 
 // Home component
 const Home = ({ navigation }) => {
@@ -20,11 +21,20 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       {/*Add logo and welcome to the home screen */}
       <Image
-        source={require('/Users/miche/Documents/m s u/Spring2k24/MOB/4443-MobileApps/Assignments/A05/myCandyApp/src/assets/019-shop.png')}
+        source={require('/Users/miche/Documents/m s u/Spring2k24/MOB/4443-MobileApps/Assignments/A05/myCandyApp/assets/019-shop.png')}
         style={styles.logo}
         resizeMode="contain"
       />
       <Text style={styles.title}>Welcome to my Candy Shop!</Text>
+
+      {/* Buttons to navigate to candy page */}
+      {/* <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('CandySearch')}
+      >
+        <AntDesign name="search1" size={24} color="white" />
+        <Text style={styles.buttonText}>Candy</Text>
+      </TouchableOpacity> */}
 
       {/* Buttons to navigate to registered users page */}
       <TouchableOpacity
@@ -47,7 +57,7 @@ const Home = ({ navigation }) => {
        {/* Buttons to navigate to registration page */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('SettingsPage')} 
+        onPress={() => navigation.navigate('SettingsPage')}
       >
         <AntDesign name="setting" size={24} color="white" />
         <Text style={styles.buttonText}>Settings</Text>
