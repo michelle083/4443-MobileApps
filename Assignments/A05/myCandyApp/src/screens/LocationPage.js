@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-// import Geolocation from 'react-native-geolocation-service';
 
 const LocationScreen = () => {
     const [location, setLocation] = useState(null);
@@ -49,7 +48,7 @@ const LocationScreen = () => {
     return (
         <MapView ref={ref => { this.mapView = ref; }} style={{ flex: 1 }} initialRegion={region}>
             <Button
-                title="Focus on My Location"
+                title="Focus on North Texas"
                 onPress={handlePress}
             />
             {markers.map((marker, index) => (

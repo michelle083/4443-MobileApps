@@ -1,48 +1,43 @@
-import React, { useState, useContext } from 'react';
-import { View, Text, Switch, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Switch, Button, StyleSheet } from 'react-native';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
-import RNPickerSelect from 'react-native-picker-select';
+import { Picker } from '@react-native-picker/picker';
+import ThemeContext from '../components/ThemeContext';
+import { useContext } from 'react';
 
-const colors = ['Red', 'Green', 'Blue', 'Yellow', 'Purple', 'Orange'];
-
-function SettingsPage() {
-  // const { theme, setTheme } = useContext(ThemeContext);
+const SettingsPage = (navigation) => {
+  const { theme, setTheme } = useContext(ThemeContext);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [color, setColor] = useState('lilac');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [isDarkMode,setTheme] = useState(true);
 
-  const toggleDarkMode = () => {
-    setTheme(isDarkMode ? 'light' : 'dark');
+  const toggleDarkMode = () => setTheme(theme === 'light' ? 'dark' : 'light');
+  //const toggleDarkMode = () => setIsDarkMode(previousState => !previousState);
+  const toggleNotifications = () => setNotificationsEnabled(previousState => !previousState);
+
+  const changeColor = () => {
+    setColor(previousColor => previousColor === 'lilac' ? 'blue' : 'lilac');
   };
 
-  const toggleNotifications = () => setNotificationsEnabled((prev) => !prev);
-
   return (
-    <View style={setTheme === 'dark' ? styles.darkContainer : styles.lightContainer}>
+    <View style={theme === 'dark' ? styles.darkContainer : styles.lightContainer}>
       <View style={styles.setting}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <AntDesign name="bulb1" size={36} color="black" />
-          <Text>Dark Mode</Text>
-        </View>
+        <AntDesign name="bulb1" size={24} color="black" />
+        <Text>Dark Mode</Text>
         <Switch value={isDarkMode} onValueChange={toggleDarkMode} />
       </View>
 
       <View style={styles.setting}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <AntDesign name="notification" size={36} color="black" />
-          <Text>Notifications</Text>
-        </View>
+        <AntDesign name="notification" size={24} color="black" />
+        <Text>Notifications</Text>
         <Switch value={notificationsEnabled} onValueChange={toggleNotifications} />
       </View>
 
       <View style={styles.setting}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <AntDesign name="edit" size={36} color="black" />
-          <Text>Color</Text>
-        </View>
-        <RNPickerSelect
-          onValueChange={(value) => console.log(value)}
-          items={colors.map((color) => ({ label: color, value: color }))}
-        />
+        <AntDesign name="edit" size={24} color="black" />
+        <Text>Color</Text>
+        <Button title={`Change theme (current: ${color})`} onPress={changeColor} />
       </View>
 
     </View>
@@ -50,24 +45,35 @@ function SettingsPage() {
 };
 
 const styles = StyleSheet.create({
-  lightContainer: {
-    backgroundColor: '#ffffff',
-    flexDirection: 'column',
+    lightContainer: {
+        backgroundColor: 'white',
+        color: 'black',
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: 10,
+        padding: 10,
+        borderWidth: 0.2,
+        borderColor: 'grey',
+      },
+      darkContainer: {
+        backgroundColor: 'darkgrey',
+        color: 'white',
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: 10,
+        padding: 10,
+        borderWidth: 0.2,
+        borderColor: 'grey',
+      },
+      // ...
+    // setting: {
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // margin: 10,
+    // padding: 10,
+    // borderWidth: 0.2,
+    // borderColor: 'grey',
   },
-  darkContainer: {
-    backgroundColor: '#363535',
-    flexDirection: 'column',
-  },
-  setting: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 10,
-    padding: 10,
-    borderWidth: 0.2,
-    borderColor: 'grey',
-    height: 80,
-    width: '95%',
-  },
-});
+);
 
 export default SettingsPage;

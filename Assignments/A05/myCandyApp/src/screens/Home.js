@@ -3,7 +3,6 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation, CommonActions } from '@react-navigation/native'; // Import CommonActions
 import { AntDesign } from '@expo/vector-icons';
-import RegistrationPage from './RegistrationPage';
 
 // Home component
 const Home = ({ navigation }) => {
@@ -37,22 +36,22 @@ const Home = ({ navigation }) => {
       </TouchableOpacity> */}
 
       {/* Buttons to navigate to registered users page */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('RegisteredUsers')}
       >
          <AntDesign name="user" size={24} color="white" />
         <Text style={styles.buttonText}>Users</Text>
-      </TouchableOpacity>  
+      </TouchableOpacity>   */}
 
       {/* Buttons to navigate to registration page */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('RegistrationPage')}
       >
         <AntDesign name="adduser" size={24} color="white" />
         <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
        {/* Buttons to navigate to registration page */}
       <TouchableOpacity
