@@ -44,10 +44,10 @@ const LoginPage = () => {
   }
   };
 
-  // // function to handle registration
-  // const handleRegistration = () => {
-  //   navigation.navigate('RegistrationPage'); // Navigate to the registration page
-  // };
+  // function to handle registration
+  const handleRegistration = () => {
+    navigation.navigate('RegistrationPage'); // Navigate to the registration page
+  };
 
   const handleBrowseAsGuest = () => {
     navigation.navigate('Home'); // Navigate to the home page
@@ -100,14 +100,14 @@ const LoginPage = () => {
       <Text style={styles.subtitles}> </Text>
       <Text style={styles.subtitles2}>-OR- </Text>
       <Text style={styles.subtitles}>Don't have an account?</Text>
-      
-      {/* <TouchableOpacity style={styles.button1} onPress={handleRegistration}>
+{/*       
+      <TouchableOpacity style={styles.button1} onPress={handleRegistration}>
         <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity> */}
-
-      {/* <Button title="Browse as Guest" onPress={handleBrowseAsGuest} />
+      </TouchableOpacity>  */}
+{/* 
+      <Button title="Browse as Guest" onPress={handleBrowseAsGuest} />
        */}
-       
+
       <TouchableOpacity style={styles.button1} onPress={handleBrowseAsGuest}>
         <Text style={styles.buttonText}>Browse as a Guest</Text>
       </TouchableOpacity>

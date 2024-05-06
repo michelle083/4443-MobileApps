@@ -9,20 +9,22 @@ import LocationPage from './src/screens/LocationPage';
 import RegisteredUsers from './src/screens/RegisteredUsers';
 import SettingsPage from './src/screens/SettingsPage';
 import CandySearch from './src/screens/CandySearch';
-import ThemeContext from './src/components/ThemeContext';
 import { useState } from 'react';
 import { useContext } from 'react';
+import { ThemeContext } from './src/components/ThemeContext';
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [theme, setTheme] = useState('light');
+  // const [theme, setTheme] = useState('light');
+
+  const [theme, setTheme] = useState(ThemeContext);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <NavigationContainer>
         <Stack.Navigator  >
-          <Stack.Screen name="LoginPage" component={LoginPage} />
+          <Stack.Screen name="LoginPage" component={LoginPage} options={{ headerShown: false }} />
           <Stack.Screen name="RegistrationPage" component={RegistrationPage} />
           <Stack.Screen name="Location" component={LocationPage} />
           <Stack.Screen name="RegisteredUsers" component={RegisteredUsers} />

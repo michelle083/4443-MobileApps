@@ -1,7 +1,32 @@
 // ThemeContext.js
+import React, { createContext, useState } from 'react';
 
-import React from 'react';
+export const ThemeContext = createContext();
 
-const ThemeContext = React.createContext();
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState('light'); // default theme is 'light'
+  const [accentColor, setAccentColor] = useState('blue');
 
-export default ThemeContext;
+  const themeStyles = {
+    light: {
+      background: '#fff',
+      text: '#000',
+      accent: accentColor,
+    },
+    dark: {
+      background: '#000000',
+      text: '#fff',
+      accent: accentColor,
+    },
+  };
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme: themeStyles[theme], toggleTheme, setAccentColor }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
