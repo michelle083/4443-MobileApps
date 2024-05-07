@@ -24,8 +24,12 @@ export const ThemeProvider = ({ children }) => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
+  const toggleAccentColor = (color) => {
+    setAccentColor(color);
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme: themeStyles[theme], toggleTheme, setAccentColor }}>
+    <ThemeContext.Provider value={{ theme: themeStyles[theme], toggleTheme, toggleAccentColor }}>
       {children}
     </ThemeContext.Provider>
   );
