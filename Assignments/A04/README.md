@@ -44,7 +44,8 @@ rich
 ```bash
 cd /root/A04
 python3 -m venv myvenv
-source myvenv/bin/activate #prompt will change with name of venv in front of it
+source myvenv/bin/activate 
+#prompt will change with name of venv in front of it
 pip install -r requirements.txt
 ```
 
